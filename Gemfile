@@ -54,4 +54,6 @@ group :production do
 	gem 'rails_12factor'
 end
 
+gem 'bootstrap-sass', '~> 3.3.5' #Allows us to use Bootstrap CSS
+gem 'devise'
 
