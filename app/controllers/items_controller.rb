@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
     @item.user_id = current_user.id #Not sure why I use this instead of @user = User.find(params[:id])
 
     if @item.save
-      redirect_to @item, notice: "Item successfully saved."
+      redirect_to items_path, notice: "Item successfully saved."
     else
       flash[:error] = "Error adding you To Do item.  Please try again."
       render :new
@@ -27,6 +27,6 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:name, :user_id)
+    params.require(:item).permit(:name, :user_id, :status, :expiration)
   end
 end
