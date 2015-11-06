@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  get 'users/index'
-  get 'users/show'
-  get 'users/update'
+  # get 'items/index'
+  # get 'items/new'
+  # get 'items/show'
+  # get 'items/edit'
 
+  devise_for :users #do 
+  resources :items #, only: [:create]
+  #end
+
+  # get 'users/index'
+  # get 'users/show'
+  # get 'users/update'
+  resources :users, only: [:update, :show, :index] # Not sure why this does not work.  Error in Application Layout.  If change to User_Path still has issues.
+  # http://guides.rubyonrails.org/routing.html
+  # See Section 2.6 -> needed to add (:id)
+  
   get 'about' => 'welcome#about'
   root :to=>"welcome#index"
 

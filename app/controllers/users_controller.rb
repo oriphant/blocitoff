@@ -13,7 +13,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
+    @user = current_user
+    @items = @user.items
+    # @items = Item.find(params[:id])
+    # http://stackoverflow.com/questions/15693479/couldnt-find-user-with-id-activerecordrecordnotfound
+    # http://stackoverflow.com/questions/30858104/couldnt-find-user-with-id-show
   end
 end
 
