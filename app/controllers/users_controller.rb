@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @user = User.find(params[:id]) if params[:id]
     @items = @user.items
     # @items = Item.find(params[:id])
     # http://stackoverflow.com/questions/15693479/couldnt-find-user-with-id-activerecordrecordnotfound

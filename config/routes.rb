@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   # get 'items/new'
   # get 'items/show'
   # get 'items/edit'
+  authenticated :user do
+    root :to => "users#show"
+  end
+
+  unauthenticated :user do
+    root :to => "welcome#index", as: 'unauthenticated_root'
+  end
 
   devise_for :users #do 
   resources :items #, only: [:create]
@@ -17,7 +24,7 @@ Rails.application.routes.draw do
   # See Section 2.6 -> needed to add (:id)
   
   get 'about' => 'welcome#about'
-  root :to=>"welcome#index"
+  # root :to=>"welcome#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
