@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   def index
+    @items = current_user.items.all
   end
 
   def new
