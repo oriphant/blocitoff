@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   # get 'items/edit'
 
   devise_for :users #do 
-  resources :items #, only: [:create]
+  resources :items
+
+  get 'items/:id/done', to: 'items#done', as: "item_done"
+
+  #, only: [:create]
   #end
 
   # get 'users/index'
@@ -19,7 +23,7 @@ Rails.application.routes.draw do
   get 'about' => 'welcome#about'
   root :to=>"welcome#index"
 
-  get 'item_done' => 'items#done'
+  # get 'item_done' => 'items#done'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

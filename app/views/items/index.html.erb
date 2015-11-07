@@ -11,7 +11,7 @@
               <!-- Could not update Status in the Items Table using Form_for construct.  Not sure why? -->
                 <!-- http://stackoverflow.com/questions/11605358/rails-button-to-update-attribute-not-working -->
                 <!-- http://stackoverflow.com/questions/7326125/ruby-rails-edit-attribute-using-a-button -->
-              <%= link_to "Done", item_done_path%>
+              <%= link_to "Done", item_done_path(item) %>
             </span>
             </br>
             <small class="pull-right">Expires - <%= item.expiration.to_date.to_formatted_s(:long_ordinal)%></small>

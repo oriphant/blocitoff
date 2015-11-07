@@ -27,6 +27,7 @@ class ItemsController < ApplicationController
   end
 
   def done
+    @item = Item.find(params[:id])
     @item.status_done
     redirect_to items_path
   end
