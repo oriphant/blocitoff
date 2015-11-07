@@ -14,6 +14,16 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def update
+    @item = Item.find(params[:id])
+    if @item.update_attributes(item_params)
+      redirect_to items_path, notice: "Item updated."
+    else
+      flash[:error] = "Error updating To Do item.  Please try again."
+      render :new
+    end
+  end
+
   def create
     @item = Item.new(item_params)
     @item.user_id = current_user.id #Not sure why I use this instead of @user = User.find(params[:id])
