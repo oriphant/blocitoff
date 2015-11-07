@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get 'about' => 'welcome#about'
   root :to=>"welcome#index"
 
+  get 'item_done' => 'items#done'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

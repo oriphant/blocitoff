@@ -11,8 +11,11 @@
 
 class Item < ActiveRecord::Base
   belongs_to :user
-
   before_create :set_default_status, :set_expiration
+
+  def status_done
+    self.update_attributes(status: 'done')
+  end
 
   private
   def set_default_status
@@ -22,4 +25,5 @@ class Item < ActiveRecord::Base
     # self.expiration = Time.now + 7.days
     self.expiration = self.created_at + 7.days
   end
+
 end
