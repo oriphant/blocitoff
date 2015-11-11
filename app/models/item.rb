@@ -19,6 +19,11 @@ class Item < ActiveRecord::Base
     self.update_attributes(status: 'done')
   end
 
+  def make_to_to
+      self.update_attributes(status: 'open')
+      self.update_attributes(expiration: Time.now + 7.days)
+  end
+
   private
   def set_default_status
     self.status = 'open'

@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # get 'items/show'
   # get 'items/edit'
   authenticated :user do
-    root :to => "users#show"
+    # root :to => "users#show"
+    root :to => "welcome#index"
   end
 
   unauthenticated :user do
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   resources :items
 
   get 'items/:id/done', to: 'items#done', as: "item_done"
+  get 'items/:id/redo', to: 'items#redo', as: "item_redo"
 
   #, only: [:create]
   #end

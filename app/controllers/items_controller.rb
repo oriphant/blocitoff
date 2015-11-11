@@ -14,6 +14,19 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def destroy
+    @user = current_user
+    @item = Item.find(params[:id])
+
+    if @item.destroy
+      flash[:notice] = " To Do Item Successfully Deleted."
+      redirect_to items_path(@wiki)
+    else
+      flash[:error] = "There Was An Error Deleting Your To Do Item.  Please Try Again."
+      render :show
+    end
+  end
+
   def update
     @item = Item.find(params[:id])
     if @item.update_attributes(item_params)
@@ -39,6 +52,12 @@ class ItemsController < ApplicationController
   def done
     @item = Item.find(params[:id])
     @item.status_done
+    redirect_to items_path
+  end
+
+  def redo
+    @item = Item.find(params[:id])
+    @item.make_to_to
     redirect_to items_path
   end
 

@@ -1,24 +1,24 @@
 <h2>User Profile</h2>
+</br>
 <div class="row">
 	<div class="col-md-8">
-		<div class="nav nav-tabs">
+
       <p>Name: <big class="text-primary"><%=current_user.name%></big></p>
   		<p>Email Address: <big class="text-primary"><%=current_user.email%></big></p>
   		<p>Member Since: <big class="text-primary"><%=current_user.created_at.to_date.to_formatted_s(:long_ordinal)%></big></p>
   		
   		<%= button_to "Edit Profile", edit_user_registration_path, method: :get, class: 'btn btn-info' %>
   		</br>
-    </div>
+      <hr>
 
-    <div class="nav nav-tabs">
   		<h3>View My To Do List</h3>
-      <p>Number of To Do Items<big class="text-primary"> <%= @user.items.count %> </big></p>
-  		<p>Number of To Do Items Completed:<big class="text-primary"> x </big></p>
-  		<p>Number of Open To Do Items<big class="text-primary"> x</big></p>
+      <p>Number of To Do Items: <big class="text-primary"> <%= @user.items.count %> </big></p>
+  		<p>Number of To Do Items Completed: <big class="text-primary"> <%= @user.items.where(:status => "done").count%> </big></p>
+  		<p>Number of Open To Do Items: <big class="text-primary"> <%= @user.items.where(:status => "open").count%></big></p>
 
   		<%= button_to "View To Do List", items_path, method: :get, class: 'btn btn-success' %>
   		</br>
-    </div>
+      <hr>
 
 		<h3>Cancel My Account</h3>
 		<p>We are sorry to see you go. Please consider carefully this cannot be undone.</p>

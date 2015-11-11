@@ -13,10 +13,11 @@
     <ul class="nav nav-tabs">
         <li><%= link_to "Blocitoff", root_path %></li>
         <li><%= link_to "About", about_path %></li>
+        <li><%= link_to "To Do List", items_path %></li>
 
         <div class="pull-right user-info">
           <% if current_user %>
-            Hello <%= link_to current_user.name, user_path(:id) %> |
+            Hello <%= link_to current_user.name, user_path(current_user) %> |
             <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
           <% else %>
             <%= link_to "Sign In", new_user_session_path %> or

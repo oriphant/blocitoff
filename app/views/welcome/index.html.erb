@@ -4,6 +4,21 @@
 	<div class="jumbotron text-center center-block">
 	  <h1 class="text-center">Blocitoff</h1>
 	  <h3 class="text-muted">A self-destructing to-do list to keep you focused on the things that really matter</h3>
+
+    <% if current_user %>
+      </br>
+      <%= button_to "View To Do's", items_path, method: :get, class: 'btn btn-info btn-lg' %>
+    <%else%>
+  </br>
+    <div class="row">
+      <div class="col-md-6 text-center">
+        <%= button_to "Sign Up", new_user_registration_path, method: :get, class: 'btn btn-info btn-lg' %>
+      </div>
+      <div class="col-md-6 text-center">
+        <%= button_to "Sign In", new_user_session_path, method: :get, class: 'btn btn-warning btn-lg' %>
+      </div>
+    </div>
+    <%end%>
 	</div>
 
 </html>
