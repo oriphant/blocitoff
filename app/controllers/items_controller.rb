@@ -36,6 +36,12 @@ class ItemsController < ApplicationController
     end
   end
 
+  def done
+    @item = Item.find(params[:id])
+    @item.status_done
+    redirect_to items_path
+  end
+
   private
   def item_params
     params.require(:item).permit(:name, :user_id, :status, :expiration)
