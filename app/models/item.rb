@@ -24,6 +24,24 @@ class Item < ActiveRecord::Base
       self.update_attributes(expiration: Time.now + 7.days)
   end
 
+  def days_left
+  # ~~~~~~~~~ Note ~~~~~~~~~~~~~~~
+    # Expiration date and created_at date could be different depending on if the user renewed the action time which resets the expiration date.  So Option 1 & 2 flawed
+
+  # ~~~~~~~~~ Option 1 ~~~~~~~~~~~~~~~
+    # if (7 - (DateTime.now.to_date - created_at.to_date).to_i)>0 
+    #   7 - (DateTime.now.to_date - created_at.to_date).to_i 
+    # else
+    #   0
+    # end 
+  
+  # ~~~~~~~~~ Option 2 ~~~~~~~~~~~~~~~
+    # (7 - (DateTime.now.to_date - created_at.to_date).to_i)>0 ? (7 - (DateTime.now.to_date - created_at.to_date).to_i) : 0
+  
+  # ~~~~~~~~~ Option 3 ~~~~~~~~~~~~~~~
+   ((expiration.to_date - DateTime.now.to_date).to_i) > 0 ?  (expiration.to_date - DateTime.now.to_date).to_i : 0
+  end
+
   private
   def set_default_status
     self.status = 'open'
