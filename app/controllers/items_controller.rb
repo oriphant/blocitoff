@@ -1,6 +1,9 @@
 class ItemsController < ApplicationController
   def index
-    @items = current_user.items.all
+    @open_items = current_user.items.where("expiration > ? AND status = ?", DateTime.now, "open")
+    @expired_items = current_user.items.where("expiration <= ? AND status = ?", DateTime.now, "open")
+    @completed_items = current_user.items.where(status: "done")
+
   end
 
   def new
@@ -57,7 +60,7 @@ class ItemsController < ApplicationController
 
   def redo
     @item = Item.find(params[:id])
-    @item.make_to_to
+    @item.make_to_open
     redirect_to items_path
   end
 

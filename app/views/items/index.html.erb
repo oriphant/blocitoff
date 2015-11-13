@@ -1,3 +1,53 @@
 <h1>List of My To Do Items</h1>
 </br>
-</br><%= render @items %>
+</br>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Not Expired Open To Dos -->
+      <% if @open_items.count > 0 %> <!-- Interesting construct to display only if it exists -->
+        <h3>Current Open Items</h3>
+        <div class="media">  
+        <div class="media-body lead">
+          <ol start="1">
+            <% @open_items.each do |item| %> 
+              <%= render partial: "items/open_item", locals: {item: item} %>
+            <%end%>
+          </ol>
+        </div>
+        </div>
+      <%end%>
+      
+      <!-- Expired Open To Dos -->
+      <% if @expired_items.count >0 %> <!-- Had to use present? to verify if line and title should appear -->
+        <hr>
+        <h3 class = "text-muted">Expired Open Items</h3>
+        <h5 class = "text-muted">Will be deleted 7 days after expiration</h5>
+        <div class="media">  
+        <div class="media-body lead text-muted">
+          <ol start="1">
+            <% @expired_items.each do |item| %>  
+              <%= render partial: "items/expired", locals: {item: item} %>
+            <%end%>
+          </ol>
+        </div>
+        </div>            
+      <%end%>
+
+      <!-- Completed Items -->
+      <% if @completed_items.count > 0 %><hr>
+        <h3 class="text-muted">Completed Items</h3>
+        <h5 class = "text-muted">Will be deleted 7 days after expiration</h5>
+        <div class="media">  
+        <div class="media-body lead text-muted">
+          <ol start="1">
+            <% @completed_items.each do |item| %>  
+              <%= render partial: "items/done", locals: {item: item} %>
+            <%end%>
+          </ol>
+          </div>
+          </div>
+      <%end%>
+      <br/>
+      <%= button_to "Add New To Do", new_item_path, method: :get, class: 'btn btn-info btn-lg' %>
+    </div>
+</div>

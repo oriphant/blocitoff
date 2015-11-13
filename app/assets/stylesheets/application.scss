@@ -20,3 +20,5 @@
  .user-info {
    margin-top: 9px;
  }
+
+ ol { padding-left:0; list-style-position:inside; } /* ~~~~ Aligns numbers to the left so no extra space.  Default is centered. ~~~~~~~~ */
