@@ -21,12 +21,21 @@ class ItemsController < ApplicationController
     @user = current_user
     @item = Item.find(params[:id])
 
+    @open_items = current_user.items.where("expiration > ? AND status = ?", DateTime.now, "open")
+    @expired_items = current_user.items.where("expiration <= ? AND status = ?", DateTime.now, "open")
+    @completed_items = current_user.items.where(status: "done")
+
     if @item.destroy
       flash[:notice] = " To Do Item Successfully Deleted."
-      redirect_to items_path(@wiki)
+      # redirect_to items_path(@wiki)
     else
       flash[:error] = "There Was An Error Deleting Your To Do Item.  Please Try Again."
-      render :show
+      # render :show
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
