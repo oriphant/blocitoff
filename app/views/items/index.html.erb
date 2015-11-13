@@ -4,72 +4,50 @@
   <div class="row">
     <div class="col-md-12">
       <!-- Not Expired Open To Dos -->
-      <% if @items.exists?(:status=>"open") %> <!-- Interesting construct to display only if it exists -->
+      <% if @open_items.count > 0 %> <!-- Interesting construct to display only if it exists -->
         <h3>Current Open Items</h3>
-        <%@i=0%>
-        <% @items.each do |item| %>  <!-- User each_with_index to create numbering each_with_index only good for non if statement lists-->
-          <div class="media">  
-            <div class="media-body lead">
-              <% if item.status =="open" && DateTime.now <= item.expiration %>
-                <% @i+=1%> <!-- Was not easy to get.  Needs to be within the if statement -->
-                <%=(@i)%>)  <%= item.name%> 
-                <span class="pull-right"><%= link_to "Delete | ", item, method: :delete, data: {confirm: 'Are you sure you want to delete this To Do Item>'}%> 
-                  <%= link_to "Done", item_done_path(item) %>
-                </span>
-                </br>
-                <small class="pull-right">Expires - <%= item.expiration.to_date.to_formatted_s(:long_ordinal)%> - <%= item.days_left%> Days Left</small>
-              <%end%>
-            </div>
-          </div>
-        <%end%>
+        <div class="media">  
+        <div class="media-body lead">
+          <ol start="1">
+            <% @open_items.each do |item| %> 
+              <%= render partial: "items/open_item", locals: {item: item} %>
+            <%end%>
+          </ol>
+        </div>
+        </div>
       <%end%>
       
       <!-- Expired Open To Dos -->
-      <% if @items.exists?(:status=>"open") %> 
-        <% if @items.exists?(:status=>"open") && @items.where("expiration < ?", DateTime.now).present? %> <!-- Had to use present? to verify if line and title should appear -->
-          <hr>
-          <h3 class = "text-muted">Expired Open Items</h3>
-        <%end%>
-        <%@i=0%>
-        <% @items.each do |item| %>  <!-- User each_with_index to create numbering each_with_index only good for non if statement lists-->
-          <div class="media">  
-            <div class="media-body lead text-muted">
-              <% if item.status =="open" && DateTime.now > item.expiration %>
-                <% @i+=1%> <!-- Was not easy to get.  Needs to be within the if statement -->
-                <%=(@i)%>)  <%= item.name%> 
-                <span class="pull-right"><%= link_to "Delete | ", item, method: :delete, data: {confirm: 'Are you sure you want to delete this To Do Item>'}%> 
-                  <%= link_to "Renew To Do", item_redo_path(item) %>
-                </span>
-                </br>
-                <small class="pull-right">Expired On - <%= item.expiration.to_date.to_formatted_s(:long_ordinal)%></small>
-              <%end%>
-            </div>
-          </div>
-        <%end%>
+      <% if @expired_items.count >0 %> <!-- Had to use present? to verify if line and title should appear -->
+        <hr>
+        <h3 class = "text-muted">Expired Open Items</h3>
+        <h5 class = "text-muted">Will be deleted 7 days after expiration</h5>
+        <div class="media">  
+        <div class="media-body lead text-muted">
+          <ol start="1">
+            <% @expired_items.each do |item| %>  
+              <%= render partial: "items/expired", locals: {item: item} %>
+            <%end%>
+          </ol>
+        </div>
+        </div>            
       <%end%>
 
       <!-- Completed Items -->
-      <% if @items.exists?(:status=>"done") %>
-      <% if @items.exists?(:status=>"open")%><hr><%end%>
+      <% if @completed_items.count > 0 %><hr>
         <h3 class="text-muted">Completed Items</h3>
-        <%@i=0%>
-        <% @items.each do |item| %>  <!-- User each_with_index to create numbering each_with_index only good for non if statement lists-->
-          <div class="media">  
-            <div class="media-body lead text-muted">
-              <% if item.status =="done"%>
-                <% @i+=1%> <!-- Needs to be within the if statement and @i needs to be set outside of loop -->
-                <%=(@i)%>)  <%= item.name%> 
-                <span class="pull-right"><%= link_to "Delete | ", item, method: :delete, data: {confirm: 'Are you sure you want to delete this To Do Item>'}%>                 
-                  <%= link_to "Do Again", item_redo_path(item) %>
-                </span>
-                </br>
-                <small class="pull-right">Deletion Date - <%= item.expiration.since(7.days).to_date.to_formatted_s(:long_ordinal)%></small><!--  Really helpful date construct to add days in display using since -->
-                </br>
-              <%end%>
-            </div>
+        <h5 class = "text-muted">Will be deleted 7 days after expiration</h5>
+        <div class="media">  
+        <div class="media-body lead text-muted">
+          <ol start="1">
+            <% @completed_items.each do |item| %>  
+              <%= render partial: "items/done", locals: {item: item} %>
+            <%end%>
+          </ol>
           </div>
-        <%end%>
+          </div>
       <%end%>
+      <br/>
       <%= button_to "Add New To Do", new_item_path, method: :get, class: 'btn btn-info btn-lg' %>
     </div>
 </div>

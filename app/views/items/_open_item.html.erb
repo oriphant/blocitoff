@@ -1,0 +1,14 @@
+<li>  
+  <%= item.name%> 
+ 
+  <span class="pull-right"><%= link_to "Delete | ", item, method: :delete, data: {confirm: 'Are you sure you want to delete this To Do Item>'}%> 
+  <%= link_to "Done", item_done_path(item) %>
+  <br/>
+  </span>
+  <br/>
+
+  <small class="pull-right">Expires - <%= item.expiration.to_date.to_formatted_s(:long_ordinal)%> - <%= item.days_left%> Days Left</small>
+  <br/>  
+</li>
+
+<br/>

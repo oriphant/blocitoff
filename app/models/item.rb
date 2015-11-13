@@ -19,7 +19,7 @@ class Item < ActiveRecord::Base
     self.update_attributes(status: 'done')
   end
 
-  def make_to_to
+  def make_to_open
       self.update_attributes(status: 'open')
       self.update_attributes(expiration: Time.now + 7.days)
   end
@@ -42,13 +42,20 @@ class Item < ActiveRecord::Base
    ((expiration.to_date - DateTime.now.to_date).to_i) > 0 ?  (expiration.to_date - DateTime.now.to_date).to_i : 0
   end
 
+  def formatted_expiration
+    expiration.since(7.days).to_date.to_formatted_s(:long_ordinal)
+  end
+
   private
   def set_default_status
     self.status = 'open'
   end
+
   def set_expiration
     # self.expiration = Time.now + 7.days
     self.expiration = self.created_at + 7.days
   end
+
+  default_scope {order('expiration asc')} # ~~~~~~~~ Sorts by date.  Default scope is not a special method or gem.  Built in. ~~~~~~~~~~~~
 
 end

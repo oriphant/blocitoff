@@ -13,7 +13,13 @@
     <ul class="nav nav-tabs">
         <li><%= link_to "Blocitoff", root_path %></li>
         <li><%= link_to "About", about_path %></li>
-        <li><%= link_to "To Do List", items_path %></li>
+        <li>
+          <% if current_user %> 
+            <%= link_to "To Do List", items_path %>
+          <%else%>        
+            <%= link_to "To Do List", new_user_session_path, onclick: "alert('You need to log in to see To Do list.')" %>
+          <%end%>
+        </li>
 
         <div class="pull-right user-info">
           <% if current_user %>

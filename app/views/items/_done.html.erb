@@ -1,0 +1,13 @@
+<li>
+  <%= item.name%> 
+
+  <span class="pull-right"><%= link_to "Delete | ", item, method: :delete, data: {confirm: 'Are you sure you want to delete this To Do Item>'}%>                 
+    <%= link_to "Do Again", item_redo_path(item) %>
+    <br/>
+  </span>
+  <br/>
+  <small class="pull-right">Deletion Date - <%= item.formatted_expiration %></small><!--  Really helpful date construct to add days in display using since -->
+  <br/>
+</li>
+
+<br/>
