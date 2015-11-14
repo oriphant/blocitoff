@@ -56,4 +56,6 @@ gem 'bootstrap-sass', '~> 3.3.5' #Allows us to use Bootstrap CSS
 gem 'devise'
 gem 'figaro', '1.0'
 gem 'faker'
+gem 'puma'
+
 
