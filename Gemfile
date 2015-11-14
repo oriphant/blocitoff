@@ -57,5 +57,6 @@ gem 'devise'
 gem 'figaro', '1.0'
 gem 'faker'
 gem 'puma'
+gem 'whenever', :require => false
 
 
