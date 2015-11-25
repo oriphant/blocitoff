@@ -17,13 +17,14 @@
           </div>
           </div>
         <!-- Horizontal Line Break -->
-        <div id="open_item_line"><!-- Ajax id -->
-          <% if @expired_items.count>0 || @completed_items.count>0 %> <!-- Why can I not delete this and just rely on destroy.js.erb file ajax code to hide this line -->
-            <hr>
-          <%end%>
-        </div>
+
         </div>
       <%end%>
+        <div id="open_item_line"><!-- Ajax id -->
+          
+          <hr>
+          
+        </div>
       
       <!-- Expired Open To Dos -->
       <% if @expired_items.count >0 %> <!-- Had to use present? to verify if line and title should appear -->
