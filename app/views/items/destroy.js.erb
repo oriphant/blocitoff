@@ -11,13 +11,3 @@ $('#item-' +<%= @item.id %>).hide();
 <% if @completed_items.blank? %>
   $('#completed_items_id').hide();
 <% end %>
-
-// Why does this not work
-<% if @expired_items.count>0 || @completed_items.count>0 %>
-  $('#open_item_line').hide();
-<% end %>
-// Just not working
-
-<% if @completed_items.blank? %>
-  $('#expired_item_line').hide();
-<%end%>

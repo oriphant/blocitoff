@@ -7,45 +7,46 @@
       <% if @open_items.count > 0 %> <!-- Interesting construct to display only if it exists -->
         <div id="open_items_id"> <!-- Ajax id -->
           <h3>Current Open Items</h3>
-          <div class="media">  
+          <div class="media">
           <div class="media-body lead">
             <ol start="1">
-              <% @open_items.each do |item| %> 
+              <% @open_items.each do |item| %>
                 <%= render partial: "items/open_item", locals: {item: item} %>
               <%end%>
             </ol>
           </div>
           </div>
         <!-- Horizontal Line Break -->
+          <% if @expired_items.count > 0 || @completed_items.count > 0 %>
+            <div id="open_item_line"><!-- Ajax id -->
+              <hr>
+            </div>
+          <% end %>
 
         </div>
       <%end%>
-        <div id="open_item_line"><!-- Ajax id -->
-          
-          <hr>
-          
-        </div>
-      
+
+
       <!-- Expired Open To Dos -->
       <% if @expired_items.count >0 %> <!-- Had to use present? to verify if line and title should appear -->
         <div id="expired_items_id"> <!-- Ajax id -->
           <h3 class = "text-muted">Expired Open Items</h3>
           <h5 class = "text-muted">Will be deleted 7 days after expiration</h5>
-          <div class="media">  
+          <div class="media">
           <div class="media-body lead text-muted">
             <ol start="1">
-              <% @expired_items.each do |item| %>  
+              <% @expired_items.each do |item| %>
                 <%= render partial: "items/expired", locals: {item: item} %>
               <%end%>
             </ol>
           </div>
           </div>
         <!-- Horizontal Line -->
-        <div id="expired_item_line"> <!-- Ajax id -->
-          <% if @completed_items.count>0 %>
-            <hr>
-          <%end%>
-        </div>               
+          <div id="expired_item_line"> <!-- Ajax id -->
+            <% if @completed_items.count>0 %>
+              <hr>
+            <%end%>
+          </div>
         </div>
       <%end%>
 
@@ -54,10 +55,10 @@
         <div id="completed_items_id">
           <h3 class="text-muted">Completed Items</h3>
           <h5 class = "text-muted">Will be deleted 7 days after expiration</h5>
-          <div class="media">  
+          <div class="media">
           <div class="media-body lead text-muted">
             <ol start="1">
-              <% @completed_items.each do |item| %>  
+              <% @completed_items.each do |item| %>
                 <%= render partial: "items/done", locals: {item: item} %>
               <%end%>
             </ol>
