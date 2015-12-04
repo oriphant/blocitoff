@@ -12,7 +12,7 @@ $('#item-' +<%= @item.id %>).hide();
   $('#completed_items_id').hide();
 <% end %>
 
-// Why does this not work
+// Only works with Ajax delete.  Need this and the code in the index to work properly
 <% if @expired_items.count == 0 || @completed_items.count == 0 %>
   $('#open_item_line').hide();
 <% end %>
